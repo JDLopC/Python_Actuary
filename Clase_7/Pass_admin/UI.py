@@ -29,14 +29,17 @@ class UI:
     
     def delete_pass(self):
         web = input('Ingrese web/aplicacion a eliminar: ')
+        self.db.delete_pass(web)
         self.menu = 0
     
     def search_pass(self):
         web = input('Ingrese web/aplicacion a buscar: ')
+        self.db.search_pass(web)
         self.menu = 0
     
     def show_pass(self):
         print('Imprimir todas las contras')
+        self.db.show_pass()
         self.menu = 0
     
     def exit(self):

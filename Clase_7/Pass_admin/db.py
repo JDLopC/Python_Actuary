@@ -1,5 +1,7 @@
 import json
 
+
+
 class Database:
     def __init__(self):
         pass
@@ -16,19 +18,41 @@ class Database:
             }
         }
         
-        with open('./data.json', mode='r') as file:
-            data:dict = json.load(file)
+        data = self.load_json()
         
         data.update(new_data)
         
-        with open('./data.json', mode='w') as file:
-            json.dump(data,file,indent=2)
+        self.update_json(data)
         
-    def delete_pass(self):
-        pass
+    def delete_pass(self, web):
+        data = self.load_json()
+        
+        if web in data.keys():
+            del data[web]
+            self.update_json(data)
+        else:
+            print('La web no existe, intente de nuevo')
+            input('Presione enter para continuar')
+        
     
-    def search_pass(self):
-        pass
+    def search_pass(self, web):
+        data = self.load_json()
+        
+        if web in data.keys():
+            print(data[web])
+        else:
+            print('La web no existe, intente de nuevo')
+            input('Presione enter para continuar')
+            
     
     def show_pass(self):
         pass
+    
+    def load_json(self):
+        with open('./data.json', mode='r') as file:
+            data:dict = json.load(file)
+        return data
+    
+    def update_json(self, data):
+        with open('./data.json', mode='w') as file:
+            json.dump(data,file,indent=2)
